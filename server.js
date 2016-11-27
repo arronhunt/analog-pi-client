@@ -16,7 +16,7 @@ app.get('/', function (req, res) {
 app.get('/listen', function (req, res) {
     let record = require('./routes/record.js')
     let upload = require('./routes/upload.js')
-    record.listen(5000, function(recording) {
+    record.listen(10000, function(recording) {
         if (recording.success) {
             upload.post(recording.filepath, function(data) {
                 res.send(data)
