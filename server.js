@@ -1,8 +1,9 @@
 "use strict"
 
 let express = require('express')
-var request = require('request')
+let request = require('request')
 let fs = require('fs')
+let ip = require('ip')
 var app = express()
 
 // TODO: Do we need a pairing feature?
@@ -31,21 +32,16 @@ app.get('/listen', function (req, res) {
 // NOTE: Pi needs to be initialized first using POST /init
 app.get('/config', function(req, res) {
     res.send({
-        name: "pi-analog",
-        uuid: "12345"
+        "success": true,
+        "initialized": false,
+        "name": "pi-analog",
+        "uuid": "12345",
+        "ip": ip.address(),
     })
 })
 
 app.post('/init', function(req, res) {
     // Create a config file that will generate details about this pi
-})
-
-// Used to locate this device on the network
-app.get('/knock', function(req, res) {
-    res.send({
-        "success": true,
-        "initialized": false
-    })
 })
 
 app.listen(3001, function () {
